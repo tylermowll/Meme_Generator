@@ -53,24 +53,16 @@ def meme_form():
 def meme_post():
     """ Create a user defined meme """
 
-    # @TODO:
-    # 1. Use requests to save the image from the image_url
-    #    form param to a temp local file.
-    # 2. Use the meme object to generate a meme using this temp
-    #    file and the body and author form paramaters.
-    # 3. Remove the temporary saved image.
+    t_img = "./temp_img.jpg"
 
     img_url = request.form.get('image_url')
     img = requests.get(img_url)
     img_content = img.content
-    body = request.form.get('body', "")
-    author = request.form.get('author', "n/a")
 
-    t_img = "./temp_img.jpg"
     with open(t_img, 'wb') as f:
         f.write(img_content)
 
-    path = meme.make_meme(t_img, body, author)
+    path = meme.make_meme(t_img, request.form.get('body', ""), request.form.get('author', "n/a"))
 
     os.remove(t_img)
 
