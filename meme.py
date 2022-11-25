@@ -1,3 +1,4 @@
+"""Generate meme using command line interface."""
 import os
 import random
 import argparse
@@ -7,7 +8,7 @@ from QuoteEngine.Ingestor import Ingestor
 
 
 def generate_meme(path=None, body=None, author=None):
-    """ Generate a meme given an path and a quote """
+    """Generate a meme given and path and a quote."""
     img = None
     quote = None
 
@@ -45,9 +46,12 @@ if __name__ == "__main__":
     # body - quote body to add to the image
     # author - quote author to add to the image
     parser = argparse.ArgumentParser(description="Meme Information.")
-    parser.add_argument('--path', default=None, type=str, help='Path to image file.')
-    parser.add_argument('--body', default=None, type=str, help='Quotation to display.')
-    parser.add_argument('--author', default=None, type=str, help='Quotation author.')
+    parser.add_argument('--path', default=None, type=str,
+                        help='Path to image file.')
+    parser.add_argument('--body', default=None, type=str,
+                        help='Quotation to display.')
+    parser.add_argument('--author', default=None, type=str,
+                        help='Quotation author.')
     args = parser.parse_args()
     print(f'Path: {args.path}, Body: {args.body}, Author: {args.author}')
     print(generate_meme(args.path, args.body, args.author))

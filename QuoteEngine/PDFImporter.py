@@ -1,3 +1,5 @@
+"""Import pdf files."""
+
 from .IngestorInterface import IngestorInterface
 from .QuoteModel import QuoteModel
 import subprocess
@@ -8,11 +10,12 @@ import random
 
 class PDFImporter(IngestorInterface):
     """Class for interpreting PDF files."""
+
     allowed_extensions = ['pdf']
 
     @classmethod
     def parse(cls, path) -> List[QuoteModel]:
-        """Method for parsing PDF files."""
+        """Parse PDF files."""
         if not cls.can_ingest(path):
             raise Exception('Cannot ingest exception')
 

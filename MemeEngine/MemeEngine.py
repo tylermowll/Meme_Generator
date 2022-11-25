@@ -1,3 +1,5 @@
+"""Create Memes."""
+
 from PIL import Image
 from PIL import ImageDraw
 import random
@@ -7,12 +9,12 @@ class MemeEngine:
     """Class for manipulating image files and adding text."""
 
     def __init__(self, save):
-        """"Initialization method taking a save path parameter."""
+        """Initialize class."""
         self.save = save
         pass
 
     def make_meme(self, image_path, text, author, width=500) -> str:
-        """Method for manipulating images files and saving the output."""
+        """Manipulate images files and saving the output."""
         print(image_path)
         with Image.open(image_path) as im:
             if im.width > width:
@@ -26,4 +28,3 @@ class MemeEngine:
             im.save(saved_path)
         im.close()
         return saved_path
-

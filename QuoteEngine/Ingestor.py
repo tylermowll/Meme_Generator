@@ -1,3 +1,5 @@
+"""Tie all importers together."""
+
 from .QuoteModel import QuoteModel
 from .IngestorInterface import IngestorInterface
 from .CSVImporter import CSVImporter
@@ -8,14 +10,16 @@ from typing import List
 
 
 class Ingestor(IngestorInterface):
-    """Class defining allowed extensions, and enveloping the IngestorInterface to determine if extensions passed are
-    permissible. """
+    """Envelope the IngestorInterface and importers."""
+
     allowed_extensions = ['docx', 'pdf', 'txt', 'csv']
 
     @classmethod
     def parse(cls, path) -> List[QuoteModel]:
-        """Using the can_ingest method from the parent class IngestorInterface this method tests if extensions passed
-        are permissible. """
+        """Use the can_ingest method from the parent class IngestorInterface.
+
+        This method also tests if extensions passed are permissible.
+        """
         if not cls.can_ingest(path):
             raise Exception('Cannot ingest exception')
 
@@ -29,6 +33,3 @@ class Ingestor(IngestorInterface):
             return PDFImporter.parse(path)
         else:
             return TXTImporter.parse(path)
-
-
-
