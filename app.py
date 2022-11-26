@@ -60,15 +60,11 @@ def meme_post():
     try:
         response = requests.get(img_url, stream=True).content
     except OSError:
-        print('Please provide a valid image URL')
+        print('URL is not valid.')
         return render_template('meme_error.html')
 
     img = requests.get(img_url)
     img_content = img.content
-
-
-
-
 
     with open(t_img, 'wb') as f:
         f.write(img_content)
