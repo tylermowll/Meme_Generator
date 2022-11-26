@@ -52,11 +52,23 @@ def meme_form():
 @app.route('/create', methods=['POST'])
 def meme_post():
     """Create a user defined meme,.."""
+
     t_img = "./temp_img.jpg"
 
     img_url = request.form.get('image_url')
+
+    try:
+        response = requests.get(img_url, stream=True).content
+    except OSError:
+        print('Please provide a valid image URL')
+        return render_template('meme_error.html')
+
     img = requests.get(img_url)
     img_content = img.content
+
+
+
+
 
     with open(t_img, 'wb') as f:
         f.write(img_content)
